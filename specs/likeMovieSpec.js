@@ -4,14 +4,13 @@ import FavoriteMovieIdb from '../src/scripts/data/favorite-movie-idb';
 describe('Liking a movie', () => {
   const addLikeButtonContainer = () => {
     document.body.innerHTML = '<div id="likeButtonContainer"></div>';
-  }
+  };
 
   beforeEach(() => {
     addLikeButtonContainer();
   });
 
   it('should show the like button when the movie has not been liked before', async () => {
-    
     await LikeButtonInitiator.init({
       likeButtonContainer: document.querySelector('#likeButtonContainer'),
       movie: {
@@ -20,11 +19,10 @@ describe('Liking a movie', () => {
     });
 
     expect(document.querySelector('[aria-label="like this movie"]'))
-    .toBeTruthy();
+      .toBeTruthy();
   });
-  
+
   it('should not show the unlike button when the movie has not been liked before', async () => {
-    
     await LikeButtonInitiator.init({
       likeButtonContainer: document.querySelector('#likeButtonContainer'),
       movie: {
@@ -37,11 +35,10 @@ describe('Liking a movie', () => {
   });
 
   it('should be able to like the movie', async () => {
-
     await LikeButtonInitiator.init({
       likeButtonContainer: document.querySelector('#likeButtonContainer'),
       movie: {
-        id: 1
+        id: 1,
       },
     });
 
@@ -56,18 +53,18 @@ describe('Liking a movie', () => {
     await LikeButtonInitiator.init({
       likeButtonContainer: document.querySelector('#likeButtonContainer'),
       movie: {
-        id: 1
+        id: 1,
       },
     });
 
-    await FavoriteMovieIdb.putMovie({ id: 1 })
+    await FavoriteMovieIdb.putMovie({ id: 1 });
     document.querySelector('#likeButton').dispatchEvent(new Event('click'));
 
     expect(await FavoriteMovieIdb.getAllMovies()).toEqual([{ id: 1 }]);
     FavoriteMovieIdb.deleteMovie(1);
   });
 
-  xit('should not add a movie when it has no id', async () => {
+  it('should not add a movie when it has no id', async () => {
     await LikeButtonInitiator.init({
       likeButtonContainer: document.querySelector('#likeButtonContainer'),
       movie: {},
@@ -75,6 +72,5 @@ describe('Liking a movie', () => {
 
     document.querySelector('#likeButton').dispatchEvent(new Event('click'));
     expect(await FavoriteMovieIdb.getAllMovies()).toEqual([]);
-    
   });
 });
