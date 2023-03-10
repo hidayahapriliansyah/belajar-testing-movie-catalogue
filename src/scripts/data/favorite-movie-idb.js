@@ -36,7 +36,8 @@ const FavoriteMovieIdb = {
   },
 
   // eslint-disable-next-line no-unused-vars
-  async searchMovies(query) {},
+  async searchMovies(query) {
+  },
 };
 
 export default FavoriteMovieIdb;
