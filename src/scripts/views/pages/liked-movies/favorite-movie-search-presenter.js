@@ -26,14 +26,21 @@ class FavoriteMovieSearchPresenter {
 
   // eslint-disable-next-line class-methods-use-this
   _showFoundMovies(movies) {
-    const html = movies.reduce(
-      (carry, movie) => carry.concat(`
-        <li class="movie">
-          <span class="movie__title">${movie.title || '-'}</span>
-        </li>
-      `),
-      '',
-    );
+    let html;
+
+    if (movies.length > 0) {
+      html = movies.reduce(
+        (carry, movie) => carry.concat(`
+          <li class="movie">
+            <span class="movie__title">${movie.title || '-'}</span>
+          </li>
+        `),
+        '',
+      );
+    } else {
+      html = '<div class="movies__not__found">Film tidak ditemukan</div>';
+    }
+
     document.querySelector('.movies').innerHTML = html;
     document.getElementById('movie-search-container')
       .dispatchEvent(new Event('movies:searched:updated'));
