@@ -26,7 +26,7 @@ class FavoriteMovieSearchPresenter {
 
   // eslint-disable-next-line class-methods-use-this
   _showFoundMovies(movies) {
-    this._view.showMovies(movies);
+    this._view.showFavoriteMovies(movies);
   }
 
   get latestQuery() {
