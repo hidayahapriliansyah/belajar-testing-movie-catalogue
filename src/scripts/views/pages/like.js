@@ -1,5 +1,9 @@
 import FavoriteMovieIdb from '../../data/favorite-movie-idb';
-import { createMovieItemTemplate } from '../templates/template-creator';
+import FavoriteMovieSearchView from './liked-movies/favorite-movie-search-view';
+import FavoriteMovieShowPresenter from './liked-movies/favorite-movie-show-presenter';
+import FavoriteMovieSearchPresenter from './liked-movies/favorite-movie-search-presenter';
+
+const view = new FavoriteMovieSearchView();
 
 const Like = {
   async render() {
@@ -13,12 +17,10 @@ const Like = {
   },
 
   async afterRender() {
-    const movies = await FavoriteMovieIdb.getAllMovies();
-    const moviesContainer = document.querySelector('#movies');
-    
-    movies.forEach((movie) => {
-      moviesContainer.innerHTML += createMovieItemTemplate(movie);
-    });
+    // eslint-disable-next-line no-new
+    new FavoriteMovieShowPresenter({ view, favoriteMovies: FavoriteMovieIdb });
+    // eslint-disable-next-line no-new
+    new FavoriteMovieSearchPresenter({ view, favoriteMovies: FavoriteMovieIdb });
   },
 };
 
