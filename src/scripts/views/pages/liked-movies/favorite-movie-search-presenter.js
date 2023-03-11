@@ -12,8 +12,15 @@ class FavoriteMovieSearchPresenter {
   }
 
   async _searchMovies(latestQuery) {
-    this._latestQuery = latestQuery;
-    const foundMovies = await this._favoriteMovies.searchMovies(this._latestQuery);
+    this._latestQuery = latestQuery.trim();
+
+    let foundMovies;
+    if (this._latestQuery.length > 0) {
+      foundMovies = await this._favoriteMovies.searchMovies(this._latestQuery);
+    } else {
+      foundMovies = await this._favoriteMovies.getAllMovies();
+    }
+
     this._showFoundMovies(foundMovies);
   }
 
